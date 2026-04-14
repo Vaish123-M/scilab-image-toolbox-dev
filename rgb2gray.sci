@@ -1,31 +1,44 @@
-function gray = rgb2gray(rgb)
-    // rgb2gray - Convert an RGB image to grayscale.
+function gray = rgb2gray(img)
+    // rgb2gray - Convert RGB image to grayscale image.
     //
     // Syntax:
-    //   gray = rgb2gray(rgb)
+    //   gray = rgb2gray(img)
     //
     // Input:
-    //   rgb  - 3D image matrix of size (height x width x 3).
+    //   img  - Numeric 3D matrix of size (height x width x 3)
     //
     // Output:
-    //   gray - 2D grayscale image matrix of size (height x width).
+    //   gray - 2D matrix of size (height x width)
 
-    // Check that input has exactly 3 dimensions.
-    dims = size(rgb);
+    // Validate number of input arguments.
+    if argn(2) <> 1 then
+        error("rgb2gray: Exactly one input argument is required.");
+    end
+
+    // Validate numeric data type (decimal or integer matrices).
+    if and(type(img) <> [1 8]) then
+        error("rgb2gray: Input must be a numeric matrix.");
+    end
+
+    // Validate that input is a 3D matrix.
+    dims = size(img);
     if size(dims, "*") <> 3 then
         error("rgb2gray: Input must be a 3D matrix of size (height x width x 3).");
     end
 
-    // Check that the third dimension has exactly 3 channels (R, G, B).
+    // Validate that image has exactly 3 channels.
     if dims(3) <> 3 then
-        error("rgb2gray: Input must have exactly 3 channels in the third dimension.");
+        error("rgb2gray: Third dimension must be 3 (R, G, B channels).");
     end
 
-    // Extract channels.
-    R = rgb(:, :, 1);
-    G = rgb(:, :, 2);
-    B = rgb(:, :, 3);
+    // Convert to double so formula works consistently for integer inputs.
+    img = double(img);
 
-    // Weighted sum conversion using standard luminance coefficients.
+    // Extract R, G, B channels using Scilab indexing.
+    R = img(:, :, 1);
+    G = img(:, :, 2);
+    B = img(:, :, 3);
+
+    // Apply standard grayscale conversion formula.
     gray = 0.2989 * R + 0.5870 * G + 0.1140 * B;
 endfunction

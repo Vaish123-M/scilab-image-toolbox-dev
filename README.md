@@ -1,59 +1,24 @@
-# Scilab Image Toolbox: rgb2gray
+# rgb2gray in Scilab
 
-This repository contains a beginner-friendly implementation of `rgb2gray` for Scilab, similar to the idea used in Octave image processing workflows.
+Simple Scilab implementation of RGB to grayscale conversion.
 
-## Function Description
+## Formula Used
 
-`rgb2gray` converts an RGB image (3 channels) into a grayscale image (single channel) using a weighted luminance formula.
-
-Formula used:
-
-`gray = 0.2989*R + 0.5870*G + 0.1140*B`
-
-## Syntax
-
-```scilab
-gray = rgb2gray(rgb)
-```
-
-## Parameters
-
-- `rgb`: A 3D matrix of size `(height x width x 3)`.
-  - `rgb(:, :, 1)` is Red channel
-  - `rgb(:, :, 2)` is Green channel
-  - `rgb(:, :, 3)` is Blue channel
-
-## Return Value
-
-- `gray`: A 2D matrix of size `(height x width)` containing grayscale intensity values.
+gray = 0.2989*R + 0.5870*G + 0.1140*B
 
 ## Files
 
-- `rgb2gray.sci`: Function definition.
-- `test_rgb2gray.sce`: Test script that creates sample data, calls the function, and displays results.
+- rgb2gray.sci: function with input validation
+- test_rgb2gray.sce: test script using random RGB image
 
-## How To Run
-
-In Scilab console, run:
+## Run in Scilab
 
 ```scilab
+exec("rgb2gray.sci", -1);
 exec("test_rgb2gray.sce", -1);
 ```
 
-## Test Cases (with explanation)
+## Input and Output
 
-1. **Random RGB image (basic functionality)**
-	- Input: `rand(h, w, 3)`
-	- Expectation: Output is a `h x w` matrix with weighted grayscale values.
-
-2. **All zeros image (black image)**
-	- Input: `zeros(h, w, 3)`
-	- Expectation: Output is all zeros.
-
-3. **All ones image (white image)**
-	- Input: `ones(h, w, 3)`
-	- Expectation: Output values are close to `1` because coefficients sum approximately to `1`.
-
-4. **Invalid channel count (error handling)**
-	- Input: matrix of size `(h x w x 2)` or `(h x w x 4)`
-	- Expectation: Function throws a clear error message that exactly 3 channels are required.
+- Input: RGB image as 3D matrix (height x width x 3)
+- Output: Grayscale image as 2D matrix (height x width)

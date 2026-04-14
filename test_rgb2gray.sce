@@ -1,29 +1,31 @@
 // test_rgb2gray.sce
-// Test script for rgb2gray.sci
+// Beginner-friendly test script for rgb2gray.sci
 
+// Clear console and workspace for a clean run.
 clc;
 clear;
 
-// Load the function file.
+// Load function definition into Scilab session.
 exec("rgb2gray.sci", -1);
 
-// Create a sample RGB image (random values in range [0, 1]).
+// Create a sample RGB image with random values in [0, 1].
 height = 4;
 width = 5;
-rgb = rand(height, width, 3);
+img = rand(height, width, 3);
 
-// Convert to grayscale.
-gray = rgb2gray(rgb);
+// Call rgb2gray function.
+gray = rgb2gray(img);
 
-// Display dimensions and values.
-disp("Input RGB image size (height x width x channels):");
-disp(size(rgb));
+// Display full input and output matrices.
+disp("Input RGB image (all three channels):");
+disp(img);
 
-disp("Output grayscale image size (height x width):");
-disp(size(gray));
-
-disp("Sample RGB image (first channel - Red):");
-disp(rgb(:, :, 1));
-
-disp("Resulting grayscale image:");
+disp("Output grayscale image:");
 disp(gray);
+
+// Display dimensions to verify conversion from 3D to 2D.
+disp("Size of input image [height width channels]:");
+disp(size(img));
+
+disp("Size of grayscale image [height width]:");
+disp(size(gray));
